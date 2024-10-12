@@ -1,0 +1,174 @@
+<div class="controllers prl15 pt10">
+  <div class="text-whole-controls mb5">
+    <div fxLayout="row" fxLayout.lt-md="column" fxFlex="70" class="table-controls">
+      <div fxFlex="45" fxFlex.lt-md="100" class="mb5">
+
+        <p-dropdown [options]="countries" [(ngModel)]="selectedTeacher" optionLabel="name" [filter]="true"
+          filterBy="name" [showClear]="false" placeholder="Select a Country">
+          <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-left gap-2">
+              <div>{{ selectedOption.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="flex align-items-left gap-2">
+              <div class="custom-dropdown">{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <p-iconField iconPosition="right">
+        <p-inputIcon styleClass="pi pi-search" class="ml-2"></p-inputIcon>
+        <input class="search-box" type="text" pInputText placeholder="Search Keyword" (keyup)="applyFilter($event)" />
+      </p-iconField>
+    </div>
+  </div>
+
+  <!-- Right Section: Action Buttons -->
+  <div class="control-buttons">
+    <!-- <button mat-mini-fab color="success" (click)="openAddEditDialog(add, {})" matTooltip="Add new teacher"
+      class="action-button">
+      <mat-icon>add</mat-icon>
+    </button> -->
+    <button mat-mini-fab color="success" [routerLink]="['../addteacherdetails']"  matTooltip="Add new teacher"
+      class="action-button">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-mini-fab color="success" (click)="toggleForm()" matTooltip="Show/Hide columns" class="action-button">
+      <mat-icon>remove_red_eye</mat-icon>
+    </button>
+    <button mat-mini-fab color="warn" (click)="
+          openDeleteDialog(selection.selected.length, selection.selected)
+        " [disabled]="!selection.hasValue()" matTooltip="Delete selected row/s" class="action-button">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-mini-fab color="success" [matMenuTriggerFor]="menu1" matTooltip="More actions">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu1="matMenu">
+      <button mat-menu-item (click)="
+            exporter.exportTable('xlsx', { fileName: 'Details-of-teachers' })
+          ">
+        <span>Export as Excel</span>
+      </button>
+      <button mat-menu-item (click)="
+            exporter.exportTable('csv', { fileName: 'Details-of-teachers' })
+          ">
+        <span>Export as Csv</span>
+      </button>
+      <button mat-menu-item (click)="
+            exporter.exportTable('json', { fileName: 'Details-of-teachers' })
+          ">
+        <span>Export as Json</span>
+      </button>
+      <button mat-menu-item (click)="
+            exporter.exportTable('txt', { fileName: 'Details-of-teachers' })
+          ">
+        <span>Export as Txt</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+<div fxLayout="row wrap" [@animation] class="mb5">
+  <div fxFlex="20" fxFlex.lt-sm="50" *ngFor="let item of checkBoxList">
+    <mat-checkbox (change)="hideColumn($event, item.def)" [checked]="item.hide">
+      {{ item.label }}
+    </mat-checkbox>
+  </div>
+</div>
+
+<div class="responsive-table">
+  <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" [hiddenColumns]="[0, 8]"
+    matSort>
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell  *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.employeeId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="teacherName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.teacherName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="subjectName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Subject(s)</th>
+      <td mat-cell *matCellDef="let element">{{ element.subject?.subjectName }}</td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="dateOfBirth">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>DOB</th>
+      <td mat-cell *matCellDef="let element">{{ element.dateOfBirth }}</td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+      <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="departmentName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+      <td mat-cell *matCellDef="let element">{{ element.department?.departmentName }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="clubName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Club</th>
+      <td mat-cell *matCellDef="let element">{{ element.club?.clubName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="mobile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let element">{{ element.mobile }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let row">
+        <!-- <button mat-icon-button color="primary" (click)="openAddEditDialog(edit, row)" matTooltip="Edit row">
+          <mat-icon>edit</mat-icon>
+        </button> -->
+        <button mat-icon-button color="primary" matTooltip="Edit row">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" (click)="openDeleteDialog(1, row)" matTooltip="Delete row">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="disColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: disColumns"  (click)="onRowClicked(row)"></tr>
+  </table>
+
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
+</div>
+
+<mat-paginator class="paginator" [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>

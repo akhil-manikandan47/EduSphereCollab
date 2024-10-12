@@ -1,0 +1,83 @@
+<p-card class="registration-card" header="User Registration" [style]="{ width: '400px', 'border-radius': '10px' }">
+  <form [formGroup]="_regForm" (ngSubmit)="proceedRegister()">
+    <div class="p-fluid">
+      <!-- Username Input -->
+      <div class="p-field mb-2">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input pInputText formControlName="userName" placeholder="Username" />
+        </p-inputGroup>
+        <small class="p-error" *NgIf="_regForm.get('userName')?.invalid && _regForm.get('userName')?.touched">
+          Username is required (minimum 5 characters).
+        </small>
+      </div>
+
+      <!-- Name Input -->
+      <div class="p-field mb-2">
+        <p-inputGroup>
+          <p-inputGroupAddon>$</p-inputGroupAddon>
+          <input type="text" formControlName="name" pInputText placeholder="Name" />
+        </p-inputGroup>
+        <small class="p-error" *NgIf="_regForm.get('name')?.invalid && _regForm.get('name')?.touched">
+          Name is required.
+        </small>
+      </div>
+
+      <!-- Email Input -->
+      <div class="p-field mb-2">
+        <p-inputGroup>
+          <p-inputGroupAddon><i class="pi pi-envelope"></i></p-inputGroupAddon>
+          <input type="email" formControlName="email" pInputText placeholder="Email" />
+        </p-inputGroup>
+        <small class="p-error" *NgIf="_regForm.get('email')?.invalid && _regForm.get('email')?.touched">
+          Email is required.
+        </small>
+      </div>
+
+      <!-- Mobile Phone Input -->
+      <div class="p-field mb-2">
+        <p-inputGroup>
+          <p-inputGroupAddon><i class="pi pi-phone"></i></p-inputGroupAddon>
+          <input type="number" formControlName="phone" pInputText placeholder="Phone" />
+        </p-inputGroup>
+        <small class="p-error" *NgIf="_regForm.get('phone')?.invalid && _regForm.get('phone')?.touched">
+          Phone number is required.
+        </small>
+      </div>
+
+      <!-- Password Input -->
+      <div class="p-field mb-2">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-key"></i>
+          </p-inputGroupAddon>
+          <input pInputText formControlName="password" type="password" placeholder="Password" />
+        </p-inputGroup>
+        <small class="p-error" *NgIf="_regForm.get('password')?.invalid && _regForm.get('password')?.touched">
+          Password is required.
+        </small>
+      </div>
+
+      <!-- Confirm Password Input -->
+      <div class="p-field mb-2">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-lock"></i>
+          </p-inputGroupAddon>
+          <input pInputText formControlName="confirmPassword" type="password" placeholder="Confirm Password" />
+        </p-inputGroup>
+        <small class="p-error" *NgIf="_regForm.get('confirmPassword')?.invalid && _regForm.get('confirmPassword')?.touched">
+          Confirm password is required.
+        </small>
+      </div>
+
+      <!-- Buttons -->
+      <div class="p-grid p-justify-between p-mt-2 button-container">
+        <p-button label="Cancel" severity="secondary" icon="pi pi-times"></p-button>
+        <p-button label="Save" type="submit" [disabled]="_regForm.invalid" icon="pi pi-check"></p-button>
+      </div>
+    </div>
+  </form>
+</p-card>

@@ -1,0 +1,92 @@
+::ng-deep .p-dropdown {
+  padding-left: 0 !important;
+}
+
+
+table,
+.form-fields {
+  width: 100%;
+  height: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.responsive-table {
+  flex: 1;
+  width: 100%;
+  max-height: 76%; // Adjust this value to your needs
+  overflow-y: auto; // Enable vertical scrolling
+  overflow-x: auto; // Hide horizontal scroll
+}
+
+.search-icon {
+  font-size: 30px !important;
+}
+
+.pt10 {
+  padding-top: 10px;
+}
+
+.prl15 {
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mb5 {
+  margin-bottom: 5px;
+  justify-content: space-between;
+
+}
+
+.paginator {
+  flex-shrink: 0; // Prevent the paginator from shrinking
+}
+
+
+.table-controls {
+  justify-content: space-between;
+  padding-right: 0;
+  margin-left: 0;
+  display: flex;
+
+  .search-box{
+  margin-left: 15px;
+
+  }
+}
+
+.text-whole-controls{
+  display: flex;
+}
+
+.action-button{
+  margin-right: 10px;
+}
+
+.mat-sort-header {
+  text-align: center;
+  align-items: center;
+  font-weight: 900;
+}
+
+.p-icon-field-right .p-input-icon:last-of-type {
+  right: 0.75rem;
+  color: #6b7280;
+}
+
+.custom-dropdown .p-dropdown {
+  padding-left: 0 !important; /* Override Bootstrap's padding */
+}
+
+.mat-mdc-cell {
+  border-bottom-color: var(--mat-table-row-item-outline-color, rgba(0, 0, 0, 0.12));
+  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
+  border-bottom-style: solid;
+  letter-spacing: var(--mat-table-row-item-label-text-tracking);
+  line-height: inherit;
+  cursor: pointer;
+}
