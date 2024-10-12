@@ -1,0 +1,47 @@
+.content {
+    padding: 24px;
+}
+
+mat-toolbar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;  // Centering content vertically
+}
+
+
+
+.logo-brand {
+    font-weight: 600;
+    color: #00cd78;
+    margin-left: 5px;
+}
+
+.logo-brand2 {
+    font-weight: 600;
+    color: #888888;
+}
+
+.user-profile-button {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    margin-left: auto; // Pushes the button to the right
+    padding: 0;
+
+    img {
+        height: 45px;
+        width: 45px;  // Ensures the image is a perfect circle
+        border-radius: 50%;
+        object-fit: cover;  // Ensures the image scales correctly
+    }
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 64px);
+}
+
+mat-sidenav, mat-sidenav-content {
+    transition: all 300ms ease-in-out;
+}

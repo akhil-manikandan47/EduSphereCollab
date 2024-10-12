@@ -1,0 +1,25 @@
+/* Center the card on the screen */
+.registration-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  
+  /* Button container styling */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  /* Button styling */
+  p-button {
+    border-radius: 20px;
+    width: 48%;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+  

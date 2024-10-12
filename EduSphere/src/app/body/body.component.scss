@@ -1,0 +1,78 @@
+.content {
+    padding: 10px;
+}
+
+mat-toolbar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center; // Centering content vertically
+}
+
+.section-button{
+    margin-left: 20px;
+    background: rgb(229, 230, 229);
+    border-radius: 10px;
+
+    mat-button{
+        border-radius: 30px;
+    }
+}
+
+.notification-button {
+    position: relative;
+    margin-left: auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.search-box{
+    height: 40px;
+    width: 250px;
+    font-size: 15px;
+}
+
+.page-title{
+    color: green;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.user-profile-button {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    margin-left: auto; // Pushes the button to the right
+    padding: 0;
+
+    img {
+        height: 45px;
+        width: 45px; // Ensures the image is a perfect circle
+        border-radius: 50%;
+        object-fit: cover; // Ensures the image scales correctly
+    }
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 64px);
+    padding-top: 0;
+}
+
+mat-sidenav,
+mat-sidenav-content {
+    transition: all 300ms ease-in-out;
+    overflow-y: auto;
+}
+
+button {
+    margin-right: 8px;
+}
+
+// .container-fluid{
+//     height: 100%;
+//     padding: 1rem;
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+// }

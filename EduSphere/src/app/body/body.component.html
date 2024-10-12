@@ -1,0 +1,65 @@
+<mat-toolbar class="mat-elevation-z3">
+    <!-- Sidebar Toggle Button -->
+    <button mat-icon-button (click)="collapsed.set(!collapsed())">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Logo -->
+    <img alt="" [height]="45" src="../../assets/images/logo/logo_for_topbar.png" />
+
+    <button mat-button class="section-button" [routerLink]="['../department-management/departmentlist']">
+        <small>Departments</small>
+    </button>
+
+    <button mat-button class="section-button" [routerLink]="['../department-management/departmentlist']">
+        <small>Clubs</small>
+    </button>
+
+    <!-- Spacer to push items to the right -->
+    <span class="spacer"></span>
+
+    <!-- Search Button with Search Bar -->
+
+    <p-iconField iconPosition="left">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input class="search-box" type="text" pInputText placeholder="Search Keyword" />
+    </p-iconField>
+
+
+    <!-- Notification Button with Hover Shake Animation -->
+    <button mat-icon-button class="notification-button">
+        <mat-icon>notifications</mat-icon>
+    </button>
+
+    <!-- User Profile Dropdown -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-profile-button">
+        <img alt="" src="../../assets/images/common_user_boy.png">
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="toggleDarkMode()">
+            <mat-icon>brightness_6</mat-icon>
+            <span>Toggle Theme</span>
+        </button>
+        <button mat-menu-item (click)="goToSettings()">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="confirmLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+        <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+        
+            <h2 class="page-title">{{ currentPageTitle }}</h2>
+            <router-outlet></router-outlet>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>
